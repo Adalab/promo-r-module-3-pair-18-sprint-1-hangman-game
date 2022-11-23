@@ -12,13 +12,13 @@ function App() {
   };
   const handleClickLetter = (event) => {
 
-    // let regex = /[a-zA-Z]/; 
-    // ; 
-    //  if(regex.test(event.target.value)){ falta meter el "borrar"
-     
-      setlastLetter (event.target.value);
+    let re = /^[a-zA-ZñÑá-úÁ-Ú´]$/;
+    if (re.test(event.target.value) || event.target.value === '') {
+      setlastLetter(event.target.value);
+ }
+      
 }
-// }
+
   
   return (
     <div className="page">
