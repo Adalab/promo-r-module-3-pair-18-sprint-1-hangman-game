@@ -1,12 +1,25 @@
 // Fichero src/components/App.js
 import '../styles/App.scss';
 import { useState } from 'react';
+// import React from 'react';
 
 function App() {
   const [numbeOfrErrors, setNumber] = useState(0);
+  const [lastLetter, setlastLetter] = useState('');
+
   const handleClick = () => {
     setNumber(numbeOfrErrors + 1);
   };
+  const handleClickLetter = (event) => {
+
+    // let regex = /[a-zA-Z]/; 
+    // ; 
+    //  if(regex.test(event.target.value)){ falta meter el "borrar"
+     
+      setlastLetter (event.target.value);
+}
+// }
+  
   return (
     <div className="page">
       <header>
@@ -50,6 +63,8 @@ function App() {
               type="text"
               name="last-letter"
               id="last-letter"
+              onChange={handleClickLetter}
+              value={lastLetter}
             />
           </form>
           <button onClick={handleClick}>Incrementar</button>
