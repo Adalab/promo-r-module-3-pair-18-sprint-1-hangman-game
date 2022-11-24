@@ -16,7 +16,7 @@ function App() {
     let re = /^[a-zA-ZñÑá-úÁ-Ú´]$/;
     if (re.test(event.target.value) || event.target.value === '') {
       setlastLetter(event.target.value);
-      setUserLetters({ ...userLetters, [lastLetter]: userLetters.value });
+      setUserLetters({ ...userLetters, [lastLetter]: lastLetter });
     }
   };
   const renderSolutionLetters = () => {
