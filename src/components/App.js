@@ -1,25 +1,34 @@
 // Fichero src/components/App.js
 import '../styles/App.scss';
-import { useState } from 'react';
+import { Fragment, useState } from 'react';
 // import React from 'react';
 
 function App() {
   const [numbeOfrErrors, setNumber] = useState(0);
   const [lastLetter, setlastLetter] = useState('');
+  const [word, setWord] = useState('Katakroker');
+  const [userLetters, setUserLetters] = useState([]);
 
   const handleClick = () => {
     setNumber(numbeOfrErrors + 1);
   };
   const handleClickLetter = (event) => {
-
     let re = /^[a-zA-ZñÑá-úÁ-Ú´]$/;
     if (re.test(event.target.value) || event.target.value === '') {
       setlastLetter(event.target.value);
- }
-      
-}
+      setUserLetters({ ...userLetters, [lastLetter]: userLetters.value });
+    }
+  };
+  const renderSolutionLetters = () => {
+    const wordLetters = word.split('');
+    return wordLetters.map((eachLetter, index) => (
+      <Fragment key={index}>
+        <li className="letter">{lastLetter}</li>
+        {/* <li class="letter">{eachLetter}</li>> */}
+      </Fragment>
+    ));
+  };
 
-  
   return (
     <div className="page">
       <header>
@@ -29,18 +38,8 @@ function App() {
         <section>
           <div className="solution">
             <h2 className="title">Solución:</h2>
-            <ul className="letters">
-              <li className="letter">k</li>
-              <li className="letter">a</li>
-              <li className="letter"></li>
-              <li className="letter">a</li>
-              <li className="letter">k</li>
-              <li className="letter">r</li>
-              <li className="letter"></li>
-              <li className="letter">k</li>
-              <li className="letter">e</li>
-              <li className="letter">r</li>
-            </ul>
+
+            <ul className="letters">{renderSolutionLetters()}</ul>
           </div>
           <div className="error">
             <h2 className="title">Letras falladas:</h2>
