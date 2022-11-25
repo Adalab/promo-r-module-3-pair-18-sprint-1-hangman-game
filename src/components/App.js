@@ -16,18 +16,47 @@ function App() {
     let re = /^[a-zA-ZñÑá-úÁ-Ú´]$/;
     if (re.test(event.target.value) || event.target.value === '') {
       setlastLetter(event.target.value);
-      setUserLetters({ ...userLetters, [lastLetter]: lastLetter });
+      if (event.target.value !== '') {
+        setUserLetters([...userLetters, event.target.value]);
+      }
+      // a lo que ya hay en userletters mete lastleter
     }
+  };
+  const renderPaint = () => {
+    setNumber(numbeOfrErrors + 1);
   };
   const renderSolutionLetters = () => {
     const wordLetters = word.split('');
-    return wordLetters.map((eachLetter, index) => (
-      <Fragment key={index}>
-        <li className="letter">{lastLetter}</li>
-        {/* <li class="letter">{eachLetter}</li>> */}
-      </Fragment>
-    ));
+    return wordLetters.map((eachLetter, index) => {
+      if (userLetters.includes(eachLetter)) {
+        return (
+          <li key={index} className="letter">
+            {eachLetter}
+          </li>
+        );
+      } else {
+        return <li key={index} className="letter"></li>;
+      }
+    });
   };
+  const renderErrorLetters = () => {
+    
+    const wordLetters = word.split('');
+    return userLetters.map((eachLetter, index) => {
+      if (wordLetters.includes(eachLetter)) {
+        // se puede vacio??????
+      } else {
+        // renderPaint();
+        return (
+          <li key={index} className="letter">
+            {eachLetter}
+          </li>
+         
+        );
+      }
+    });
+  };
+
 
   return (
     <div className="page">
@@ -43,13 +72,7 @@ function App() {
           </div>
           <div className="error">
             <h2 className="title">Letras falladas:</h2>
-            <ul className="letters">
-              <li className="letter">f</li>
-              <li className="letter">q</li>
-              <li className="letter">h</li>
-              <li className="letter">p</li>
-              <li className="letter">x</li>
-            </ul>
+            <ul className="letters">{renderErrorLetters()}</ul>
           </div>
           <form className="form">
             <label className="title" htmlFor="last-letter">
