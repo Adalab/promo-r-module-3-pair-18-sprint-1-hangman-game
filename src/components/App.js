@@ -1,30 +1,45 @@
 // Fichero src/components/App.js
 import '../styles/App.scss';
-import { Fragment, useState } from 'react';
+import { useEffect, useState } from 'react';
+import getWords from '../../src/services/api'
 // import React from 'react';
 
 function App() {
   const [numbeOfrErrors, setNumber] = useState(0);
   const [lastLetter, setlastLetter] = useState('');
-  const [word, setWord] = useState('Katakroker');
+  const [word, setWord] = useState('');
   const [userLetters, setUserLetters] = useState([]);
 
-  const handleClick = () => {
-    setNumber(numbeOfrErrors + 1);
-  };
+
+  useEffect (() => {
+    getWords() .then (data => {
+      setWord(data);
+      console.log(data.name);
+      console.log (word)
+    })
+  });
+  // const handleClick = () => {
+  //   setNumber(numbeOfrErrors + 1);
+  // };
   const handleClickLetter = (event) => {
+    const wordLetters = word.split('');
     let re = /^[a-zA-ZñÑá-úÁ-Ú´]$/;
     if (re.test(event.target.value) || event.target.value === '') {
       setlastLetter(event.target.value);
       if (event.target.value !== '') {
         setUserLetters([...userLetters, event.target.value]);
+        userLetters.map((eachLetter, index) => {
+      if (wordLetters.includes(eachLetter)) {
+        // x
+      } else { 
+        setNumber(numbeOfrErrors + 1);
+        
+      };
+        })
+        }
       }
-      // a lo que ya hay en userletters mete lastleter
-    }
   };
-  const renderPaint = () => {
-    setNumber(numbeOfrErrors + 1);
-  };
+
   const renderSolutionLetters = () => {
     const wordLetters = word.split('');
     return wordLetters.map((eachLetter, index) => {
@@ -35,29 +50,29 @@ function App() {
           </li>
         );
       } else {
+        
         return <li key={index} className="letter"></li>;
+        
+
       }
     });
   };
   const renderErrorLetters = () => {
+   
     
     const wordLetters = word.split('');
     return userLetters.map((eachLetter, index) => {
       if (wordLetters.includes(eachLetter)) {
-        // se puede vacio??????
-      } else {
-        // renderPaint();
+    
+      } else { 
         return (
           <li key={index} className="letter">
             {eachLetter}
           </li>
-         
         );
       }
     });
   };
-
-
   return (
     <div className="page">
       <header>
@@ -89,7 +104,7 @@ function App() {
               value={lastLetter}
             />
           </form>
-          <button onClick={handleClick}>Incrementar</button>
+          {/* <button onClick={handleClick}>Incrementar</button> */}
         </section>
 
         <section className={`dummy error-${numbeOfrErrors}`}>
@@ -110,6 +125,6 @@ function App() {
       </main>
     </div>
   );
-}
+  }
 
 export default App;
