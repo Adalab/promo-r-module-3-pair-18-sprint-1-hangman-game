@@ -12,12 +12,11 @@ function App() {
 
 
   useEffect (() => {
-    getWords() .then (data => {
-      setWord(data);
-      console.log(data.name);
-      console.log (word)
-    })
-  });
+    getWords().then (data => {
+      setWord(data.word);
+      console.log(data.word)
+    });
+  },[]);
   // const handleClick = () => {
   //   setNumber(numbeOfrErrors + 1);
   // };
