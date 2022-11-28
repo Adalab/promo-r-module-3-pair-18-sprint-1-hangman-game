@@ -32,7 +32,14 @@ function App() {
         // x
       } else { 
         setNumber(numbeOfrErrors + 1);
-        
+        // aqui lo dificil. primer if le digo que si la letra que mete la usuaria
+        // cumple requisitos o si esta vacia, y si los cumple me la quedo
+        //con esa letra que me he quedado valoro si es diferente a nada y si lo cumple la meto en
+        // userlleter. Y ademas de meterla en userleter, le hago un mapeo a userleter
+        // y le pregunto que si la letrita que mete la usuaria
+        // esta por cada letrita de worsleter( palabra traida por fetch)
+        // esta incluida . Si SI esta incluida no hago nada por que ya lo estoy haciendo en otra funcion
+        //y si no esta incluida meto la funcion que teniamos desde el principio para añadir el error. y que lo pinte
       };
         })
         }
