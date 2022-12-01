@@ -1,7 +1,7 @@
-const Dummy = () => {
+const Dummy = (props) => {
   return (
     <div>
-      <section className={`dummy error-${numbeOfrErrors}`}>
+      <section className={`dummy error-${props.numbeOfrErrors}`}>
         <span className="error-13 eye"></span>
         <span className="error-12 eye"></span>
         <span className="error-11 line"></span>

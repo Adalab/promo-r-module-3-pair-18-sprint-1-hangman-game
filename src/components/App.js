@@ -4,6 +4,11 @@ import { useEffect, useState } from 'react';
 import getWords from '../../src/services/api';
 import Header from './Hader';
 import Dummy from './Dummy';
+import SolutionLetters from './SolutionLetters';
+import ErrorLetters from './ErrorLetters';
+import Form from './Form';
+import Footer from './Footer';
+import { Routes, Route, Link } from 'react-router-dom';
 // import React from 'react';
 
 function App() {
@@ -81,37 +86,19 @@ function App() {
       </header>
       <main className="main">
         <section>
-          <div className="solution">
-            <h2 className="title">Solución:</h2>
-
-            <ul className="letters">{renderSolutionLetters()}</ul>
-          </div>
-          <div className="error">
-            <h2 className="title">Letras falladas:</h2>
-            <ul className="letters">{renderErrorLetters()}</ul>
-          </div>
-          <form className="form">
-            <label className="title" htmlFor="last-letter">
-              Escribe una letra:
-            </label>
-            <input
-              autoComplete="off"
-              className="form__input"
-              maxLength="1"
-              type="text"
-              name="last-letter"
-              id="last-letter"
-              onChange={handleClickLetter}
-              value={lastLetter}
-            />
-          </form>
+          <SolutionLetters renderSolutionLetters={renderSolutionLetters} />
+          <ErrorLetters renderErrorLetters={renderErrorLetters} />
+          <Form handleClickLetter={handleClickLetter} lastLetter={lastLetter} />
           {/* <button onClick={handleClick}>Incrementar</button> */}
         </section>
 
         <section>
-          <Dummy />
+          <Dummy numbeOfrErrors={numbeOfrErrors} />
         </section>
       </main>
+      <Routes>
+        <Route path="/footer" element={<Footer></Footer>} />
+      </Routes>
     </div>
   );
 }
